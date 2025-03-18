@@ -121,3 +121,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.bgImage{
+  background-image: url(../assets/weatherbackground.jpg);
+}

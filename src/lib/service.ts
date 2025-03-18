@@ -1,6 +1,9 @@
-const searchCityName= 'stockton';
-const APIKEY = '';
+import dotenv from 'dotenv';
+dotenv.config();
 
+const APIKEY = process.env.API_KEY;
+
+const searchCityName= 'stockton';
 
 
 

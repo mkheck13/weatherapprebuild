@@ -5,12 +5,12 @@ import { getWeather, fiveDay } from "@/lib/service";
 
 
 export default function Home() {
-  
+
 
 
 
   return (
-    <div>
+    <div className="bgImage">
       {/* Location and Favorite Button */}
       <div className="flex justify-center">
         <Input placeholder="location" />
