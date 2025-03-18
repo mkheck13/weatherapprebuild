@@ -21,9 +21,9 @@
 
 [Figma](https://www.figma.com/design/cj4u1KZ6hjWFjEGZiu7Kcw/WeathrSprint?node-id=0-1&p=f&t=RUtDq0MmJ5j0GkRk-0)
 
-[Github-Repo]()
+[Github-Repo](https://github.com/mkheck13/weatherapprebuild)
 
-[Vercel]()
+[Vercel](https://weatherapprebuild-phi.vercel.app/)
 
 ## FeedBack/Peer Review: 
 

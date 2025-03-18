@@ -1,9 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { getWeather, fiveDay } from "@/lib/service";
 
 
 export default function Home() {
+  
+
+
+
   return (
     <div>
       {/* Location and Favorite Button */}
@@ -14,7 +19,15 @@ export default function Home() {
 
       {/* Current Forecast */}
       <div>
-
+        <Card>
+          <CardHeader>Location</CardHeader>
+          <Button>Star Icon</Button>
+          <CardDescription>Image Here</CardDescription>
+          <CardContent>Temp</CardContent>
+          <CardContent>Date</CardContent>
+          <CardContent>High / Low</CardContent>
+          <CardContent>Condition</CardContent>
+        </Card>
       </div>
 
       {/* Five day forecast */}
@@ -24,7 +37,7 @@ export default function Home() {
           <Card className="w-[240px]">
             <CardHeader>Forecast Card 1</CardHeader>
             <CardDescription>Image Here</CardDescription>
-            <CardContent>56 / 45</CardContent>
+            <CardContent>56° / 45°</CardContent>
           </Card>
         </div>
 
@@ -33,7 +46,7 @@ export default function Home() {
           <Card className="w-[240px]">
             <CardHeader>Forecast Card 2</CardHeader>
             <CardDescription>Image Here</CardDescription>
-            <CardContent>56 / 45</CardContent>
+            <CardContent>56° / 45°</CardContent>
           </Card>
         </div>
 
@@ -42,7 +55,7 @@ export default function Home() {
           <Card className="w-[240px]">
             <CardHeader>Forecast Card 3</CardHeader>
             <CardDescription>Image Here</CardDescription>
-            <CardContent>56 / 45</CardContent>
+            <CardContent>56° / 45°</CardContent>
           </Card>
         </div>
 
@@ -51,7 +64,7 @@ export default function Home() {
           <Card className="w-[240px]">
             <CardHeader>Forecast Card 4</CardHeader>
             <CardDescription>Image Here</CardDescription>
-            <CardContent>56 / 45</CardContent>
+            <CardContent>56° / 45°</CardContent>
           </Card>
         </div>
 
@@ -60,7 +73,7 @@ export default function Home() {
           <Card className="w-[240px]">
             <CardHeader>Forecast Card 5</CardHeader>
             <CardDescription>Image Here</CardDescription>
-            <CardContent>56 / 45</CardContent>
+            <CardContent>56° / 45°</CardContent>
           </Card>
         </div>
       </div>
