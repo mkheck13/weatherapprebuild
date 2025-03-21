@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { getWeather, getWeatherName } from '@/lib/service';
 import { CurrentWeather, CurrentWeatherName, FiveDay, FiveDayList, GeoLocation } from '@/interfaces/interface';
@@ -8,8 +7,7 @@ interface CurrentCardProps {
     lat: number;
     lon: number;
     locationName?: string;
-  }
-
+}
 
 const CurrentCard = ({ lat, lon, locationName }: CurrentCardProps) => {
     const [temp, setTemp] = useState<number | null>(null);
@@ -19,7 +17,7 @@ const CurrentCard = ({ lat, lon, locationName }: CurrentCardProps) => {
     const [weatherType, setWeatherType] = useState<string | null>(null);
     const [location, setLocation] = useState<string | null>(null);
     const [currentDate, setCurrentDate] = useState<string>('');
-
+    const [isDaytime, setIsDaytime] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchWeather = async () => {
@@ -39,7 +37,7 @@ const CurrentCard = ({ lat, lon, locationName }: CurrentCardProps) => {
                 setLowTemp(Math.round(weatherData.main.temp_min));
                 setWeatherType(weatherData.weather[0].main);
                 setIcon(`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`);
-                
+
                 if (locationName) {
                     setLocation(locationName);
                 } else {
@@ -47,15 +45,13 @@ const CurrentCard = ({ lat, lon, locationName }: CurrentCardProps) => {
                 }
 
                 const date = new Date();
-                const options: Intl.DateTimeFormatOptions = { 
-                    weekday: 'long', 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
+                const options: Intl.DateTimeFormatOptions = {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
                 };
                 setCurrentDate(date.toLocaleDateString('en-US', options));
-
-
 
             } catch (error) {
                 console.error("Error fetching weather data:", error);
@@ -65,36 +61,21 @@ const CurrentCard = ({ lat, lon, locationName }: CurrentCardProps) => {
         fetchWeather();
     }, [lat, lon, locationName]);
 
+    return (
+        <div className="mainCard mx-auto p-6 md:p-10 text-center flex justify-center">
+            <div className="bgCard flex flex-wrap items-center justify-center p-4 md:p-8 w-full">
+                {icon && <img className="w-16 md:w-24 lg:w-32" src={icon} alt="weather icon" />}
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold">{temp}°</h1>
+                <div className="text-center flex-grow">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl">{location || "Loading location..."}</h2>
+                    <p className="text-lg md:text-xl">{currentDate}</p>
+                    <p className="text-md md:text-lg">{weatherType}</p>
+                </div>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl">{highTemp}° / {lowTemp}°</h1>
+            </div>
+        </div>
+    );
 
-
-
-  return (
-    <div className='mainCard'>
-      <div className='bgCard'>
-      {icon && <img src={icon} alt="weather icon" />}
-      <h1>{temp}°</h1>
-      <div>
-        <h2>{location ? `${location}` : "Loading location..."}</h2>
-        <p>{currentDate}</p>
-        <p>{weatherType}</p>
-      </div>
-      <h1>{highTemp}° / {lowTemp}°</h1>
-        {/* <Card>
-          <CardHeader>{location ? `${location}` : "Loading location..."}</CardHeader>
-          <Button>Star Icon</Button>
-          <CardDescription>
-          {icon && <img src={icon} alt="weather icon" />}
-          </CardDescription>
-          <CardContent>{temp}°</CardContent>
-          <CardContent>{currentDate}</CardContent>
-          <CardContent>{highTemp}° / {lowTemp}°</CardContent>
-          <CardContent>{weatherType}</CardContent>
-        </Card> */}
-
-        
-      </div>
-    </div>
-  )
 }
 
-export default CurrentCard
+export default CurrentCard;

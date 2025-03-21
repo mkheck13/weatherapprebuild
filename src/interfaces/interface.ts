@@ -10,7 +10,7 @@ export interface CurrentWeatherName {
     lat: number;
     lon: number;
     name: string;
-    state?: string; 
+    state?: string;
 }
 
 export interface Weather {
@@ -22,7 +22,7 @@ export interface Weather {
 export interface WeatherCondition {
     description: string;
     main: string;
-    icon: string;  
+    icon: string;
 }
 
 export interface CurrentWeather {
@@ -33,7 +33,7 @@ export interface CurrentWeather {
     dt: number;
     main: Weather;
     timezone: number;
-    weather: WeatherCondition[]; 
+    weather: WeatherCondition[];
 }
 
 export interface FiveDayList {
@@ -46,5 +46,5 @@ export interface FiveDay {
     city: {
         timezone: number;
     };
-    list: FiveDayList[]; 
+    list: FiveDayList[];
 }
