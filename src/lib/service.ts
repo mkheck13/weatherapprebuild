@@ -1,6 +1,7 @@
 import { CurrentWeatherName, CurrentWeather, FiveDay } from '@/interfaces/interface';
 
-import { APIKEY } from './apikey';
+// import { APIKEY } from './apikey';
+const APIKEY='c7c14ffa0ae0ecde70760ca1866e035c';
 
 // Function to get current weather data by latitude and longitude
 export const getWeather = async (lat: number, lon: number) => {
