@@ -37,8 +37,8 @@ const FiveDayForecast: React.FC<FiveDayForecastProps> = ({ lat, lon }) => {
                 const processedForecast: DailyForecast[] = Object.keys(dailyData).map((day) => {
                     const dayForecasts = dailyData[day];
 
-                    let minTemp = Math.min(...dayForecasts.map((f) => f.main.temp_min));
-                    let maxTemp = Math.max(...dayForecasts.map((f) => f.main.temp_max));
+                    const minTemp = Math.min(...dayForecasts.map((f) => f.main.temp_min));
+                    const maxTemp = Math.max(...dayForecasts.map((f) => f.main.temp_max));
 
                     const noonForecast = dayForecasts.find((f) => {
                         const hour = new Date(f.dt * 1000).getHours();
