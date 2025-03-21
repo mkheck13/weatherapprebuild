@@ -2,7 +2,7 @@
 
 **Description:** Rebuild Your Weather App using Your Original Figma.
 
-![Design preview for Weather App Rebuild]()
+![Design preview for Weather App Rebuild](./src/assets/WeatherScreenshot.png)
 
 ***Here are the requirements that are needed:***
 - Built in Next.JS / TypeScript 
