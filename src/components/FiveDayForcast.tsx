@@ -1,6 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { fiveDay } from "@/lib/service";
 
+// Define the structure of each forecast item returned by the API
+interface ForecastItem {
+    dt: number;
+    main: {
+        temp_min: number;
+        temp_max: number;
+    };
+    weather: {
+        icon: string;
+        main: string;
+    }[];
+}
+
+// Define the expected API response
+interface FiveDayApiResponse {
+    list: ForecastItem[];
+}
+
 interface FiveDayForecastProps {
     lat: number;
     lon: number;
@@ -20,9 +38,10 @@ const FiveDayForecast: React.FC<FiveDayForecastProps> = ({ lat, lon }) => {
     useEffect(() => {
         const fetchForecast = async () => {
             try {
-                const data = await fiveDay(lat, lon);
+                const data: FiveDayApiResponse = await fiveDay(lat, lon);
 
-                const dailyData: { [key: string]: any[] } = {};
+                // Organize forecast by days
+                const dailyData: Record<string, ForecastItem[]> = {};
                 data.list.forEach((item) => {
                     const date = new Date(item.dt * 1000);
                     const day = date.toLocaleDateString("en-US", { weekday: "short" });
@@ -30,7 +49,6 @@ const FiveDayForecast: React.FC<FiveDayForecastProps> = ({ lat, lon }) => {
                     if (!dailyData[day]) {
                         dailyData[day] = [];
                     }
-
                     dailyData[day].push(item);
                 });
 
@@ -66,7 +84,7 @@ const FiveDayForecast: React.FC<FiveDayForecastProps> = ({ lat, lon }) => {
     return (
         <div className="flex justify-evenly flex-wrap gap-1 mt-4">
             {forecast.map((day, index) => (
-                <div key={index} className="w-[190px] fiveCard  text-black p-3 rounded-lg text-center ">
+                <div key={index} className="w-[190px] fiveCard text-black p-3 rounded-lg text-center">
                     <h3 className="font-bold">{day.day}</h3>
                     <div className="flex justify-center">
                         <img
@@ -74,7 +92,6 @@ const FiveDayForecast: React.FC<FiveDayForecastProps> = ({ lat, lon }) => {
                             alt="weather icon"
                         />
                     </div>
-
                     <p>{Math.round(day.maxTemp)}° / {Math.round(day.minTemp)}°</p>
                 </div>
             ))}
