@@ -1,84 +1,63 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { getWeather, fiveDay } from "@/lib/service";
+'use client'
 
+import React, { useState, useEffect } from 'react';
+import CurrentCard from "@/components/CurrentCard";
+import FiveDayForecast from "@/components/FiveDayForcast";
+import Search from "@/components/Search";
+import { getCurrentLocation, getWeatherName } from '@/lib/service'; 
 
 export default function Home() {
+  const [selectedLocation, setSelectedLocation] = useState({
+    lat: 40.7128, 
+    lon: -74.0060, 
+    name: 'New York' 
+  });
 
 
+  useEffect(() => {
+    const fetchLocation = async () => {
+      try {
 
+        const position = await getCurrentLocation();
+        
+        const locationData = await getWeatherName(position.coords.latitude, position.coords.longitude);
+
+        const locationName = locationData && locationData.length > 0
+          ? `${locationData[0].name}, ${locationData[0].country}`
+          : 'Unknown Location';
+
+        setSelectedLocation({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+          name: locationName
+        });
+      } catch (error) {
+        console.error('Error fetching location', error);
+      }
+    };
+    fetchLocation();
+  }, []); 
+
+  const handleLocationSelect = (lat: number, lon: number, locationName: string) => {
+    setSelectedLocation({
+      lat,
+      lon,
+      name: locationName
+    });
+  };
 
   return (
     <div className="bgImage">
-      {/* Location and Favorite Button */}
-      <div className="flex justify-center">
-        <Input placeholder="location" />
-        <Button>Favorites</Button>
-      </div>
-
-      {/* Current Forecast */}
-      <div>
-        <Card>
-          <CardHeader>Location</CardHeader>
-          <Button>Star Icon</Button>
-          <CardDescription>Image Here</CardDescription>
-          <CardContent>Temp</CardContent>
-          <CardContent>Date</CardContent>
-          <CardContent>High / Low</CardContent>
-          <CardContent>Condition</CardContent>
-        </Card>
-      </div>
-
-      {/* Five day forecast */}
-      <div className="flex justify-evenly">
-        {/* Card 1 */}
-        <div>
-          <Card className="w-[240px]">
-            <CardHeader>Forecast Card 1</CardHeader>
-            <CardDescription>Image Here</CardDescription>
-            <CardContent>56° / 45°</CardContent>
-          </Card>
-        </div>
-
-        {/* Card 2 */}
-        <div>
-          <Card className="w-[240px]">
-            <CardHeader>Forecast Card 2</CardHeader>
-            <CardDescription>Image Here</CardDescription>
-            <CardContent>56° / 45°</CardContent>
-          </Card>
-        </div>
-
-        {/* Card 3 */}
-        <div>
-          <Card className="w-[240px]">
-            <CardHeader>Forecast Card 3</CardHeader>
-            <CardDescription>Image Here</CardDescription>
-            <CardContent>56° / 45°</CardContent>
-          </Card>
-        </div>
-
-        {/* Card 4 */}
-        <div>
-          <Card className="w-[240px]">
-            <CardHeader>Forecast Card 4</CardHeader>
-            <CardDescription>Image Here</CardDescription>
-            <CardContent>56° / 45°</CardContent>
-          </Card>
-        </div>
-
-        {/* Card 5 */}
-        <div>
-          <Card className="w-[240px]">
-            <CardHeader>Forecast Card 5</CardHeader>
-            <CardDescription>Image Here</CardDescription>
-            <CardContent>56° / 45°</CardContent>
-          </Card>
-        </div>
-      </div>
-
+      <Search onLocationSelect={handleLocationSelect} />
+      <CurrentCard 
+        lat={selectedLocation.lat} 
+        lon={selectedLocation.lon} 
+        locationName={selectedLocation.name} 
+      />
+      <FiveDayForecast 
+        lat={selectedLocation.lat} 
+        lon={selectedLocation.lon} 
+      />
     </div>
-
   );
 }
