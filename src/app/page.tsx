@@ -15,7 +15,6 @@ export default function Home() {
     name: 'New York' 
   });
 
-
   useEffect(() => {
     const fetchLocation = async () => {
       try {
