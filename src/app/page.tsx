@@ -1,5 +1,7 @@
 'use client'
 
+require('dotenv').config();
+
 import React, { useState, useEffect } from 'react';
 import CurrentCard from "@/components/CurrentCard";
 import FiveDayForecast from "@/components/FiveDayForcast";

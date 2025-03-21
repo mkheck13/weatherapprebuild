@@ -1,8 +1,6 @@
 import { CurrentWeatherName, CurrentWeather, FiveDay } from '@/interfaces/interface';
-import dotenv from 'dotenv';
-dotenv.config();
 
-const APIKEY = '';
+import { APIKEY } from './apikey';
 
 // Function to get current weather data by latitude and longitude
 export const getWeather = async (lat: number, lon: number) => {
