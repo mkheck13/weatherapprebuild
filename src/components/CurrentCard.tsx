@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Button } from "@/components/ui/button";
 import { getWeather, getWeatherName } from '@/lib/service';
-import { CurrentWeather, CurrentWeatherName, FiveDay, FiveDayList, GeoLocation } from '@/interfaces/interface';
+import { CurrentWeatherName } from '@/interfaces/interface';
 
 interface CurrentCardProps {
     lat: number;
@@ -17,7 +16,6 @@ const CurrentCard = ({ lat, lon, locationName }: CurrentCardProps) => {
     const [weatherType, setWeatherType] = useState<string | null>(null);
     const [location, setLocation] = useState<string | null>(null);
     const [currentDate, setCurrentDate] = useState<string>('');
-    const [isDaytime, setIsDaytime] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchWeather = async () => {
