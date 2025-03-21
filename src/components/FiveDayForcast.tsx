@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fiveDay } from "@/lib/service";
 
-// Define the structure of each forecast item returned by the API
 interface ForecastItem {
     dt: number;
     main: {
@@ -14,7 +13,6 @@ interface ForecastItem {
     }[];
 }
 
-// Define the expected API response
 interface FiveDayApiResponse {
     list: ForecastItem[];
 }
